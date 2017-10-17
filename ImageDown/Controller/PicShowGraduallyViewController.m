@@ -12,7 +12,7 @@
 /**
  *网络静态图url
  */
-//#define imgURL @"http://b.zol-img.com.cn/desk/bizhi/image/1/1920x1200/1348810232493.jpg"
+#define imgURL @"http://b.zol-img.com.cn/desk/bizhi/image/1/1920x1200/1348810232493.jpg"
 
 /**
  * 网络gif图片URL
@@ -23,7 +23,7 @@
 /**
  *本地gif图片path
  */
-#define imgURL [[NSBundle mainBundle]pathForResource:@"54D2FBAC25E9A188F0BAD11F1401BCA4" ofType:@"gif"]
+//#define imgURL [[NSBundle mainBundle]pathForResource:@"54D2FBAC25E9A188F0BAD11F1401BCA4" ofType:@"gif"]
 
 
 @interface PicShowGraduallyViewController ()<LLImageLoadBitDelegate>
@@ -56,7 +56,7 @@
     /** 一、
      * block模式
      */
-    [[LLImageLoadBit alloc]initWithUrl:imgURL withType:gifImages  withBlock:^(UIImage *image) {
+    [[LLImageLoadBit alloc]initWithUrl:imgURL withType:signalImage  withBlock:^(UIImage *image) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.imgView.image = image;
         });
@@ -69,7 +69,7 @@
 //    [[LLImageLoadBit alloc]initWithUrl:imgURL withDelegate:self withType:gifImages];
     
 }
-
+#pragma mark - LLImageLoadBitDelegate
 -(void)LLImageLoadBitDiddidReceiveGetImages:(UIImage *)image{
     
     dispatch_async(dispatch_get_main_queue(), ^{

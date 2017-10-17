@@ -40,13 +40,13 @@
 }
 
 -(NSMutableData *)imgData{
-    
     if (!_imgData) {
         _imgData = [[NSMutableData alloc]init];
     }
     return _imgData;
     
 }
+
 -(NSMutableData *)TempImgData{
     if (!_TempImgData) {
         _TempImgData = [[NSMutableData alloc]init];
@@ -98,7 +98,7 @@
         if (myImageSource == NULL) return;
 
         size_t count = CGImageSourceGetCount(myImageSource);
-
+        
         UIImage *img = nil;
         if (count <= 1) {//一张图片
             CGImageRef imgRef = CGImageSourceCreateImageAtIndex(myImageSource, 0, NULL);
@@ -108,7 +108,7 @@
             img = [self getCombineImages:myImageSource index:count];
         }
         /**
-         *
+         * 数据处理完成后回调
          */
         if (self.block) self.block(img);
         else if (self.delegate){
@@ -116,7 +116,6 @@
                 [_delegate LLImageLoadBitDiddidReceiveGetImages:img];
             }
         }
-        
         CFRelease(myImageSource);
     });
 }
@@ -187,7 +186,6 @@
 }
 
 #pragma mark - NSURLSessionDataDelegate
-
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler {
     
     NSLog(@"%@", NSStringFromSelector(_cmd));
