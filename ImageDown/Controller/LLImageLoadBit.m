@@ -14,7 +14,7 @@
 @property (nonatomic,copy) void(^block)(UIImage *image);
 @property (nonatomic,assign)CGImageSourceRef incrementallyImgSource;
 @property (nonatomic,strong)NSMutableData *imgData;
-@property (nonatomic,strong)NSMutableData *TempImgData;//临时存放数据，到一定量才转好成image
+@property (nonatomic,strong)NSMutableData *TempImgData;//临时存放数据，到一定量才转换成image
 @property (nonatomic,assign)long long expectedLeght;//数据总长度
 @property (nonatomic,weak)id<LLImageLoadBitDelegate>delegate;
 
@@ -54,13 +54,14 @@
     return _TempImgData;
 }
 
-
+/**
+ * block模式方法
+ */
 -(void)initWithUrl:(NSString *)imageUrl withType:(ImageTypeOptions)option withBlock:(void (^)(UIImage *))imgBlock{
-    
-        self.block = imgBlock;
-        [self imageReqest:imageUrl withType:option];
-    
+    self.block = imgBlock;
+    [self imageReqest:imageUrl withType:option];
 }
+
 -(void)imageReqest:(NSString *)imageUrl withType:(ImageTypeOptions)option{
     switch (option) {
         case signalImage:
@@ -85,9 +86,15 @@
      *放到线程里去下载
      */
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
+        /**
+         *加载网络图片
+         */
         CGImageSourceRef myImageSource = CGImageSourceCreateWithURL((__bridge CFURLRef)[NSURL URLWithString:url], NULL);
+        /**
+         *加载本地图片
+         */
         if (myImageSource == NULL) myImageSource = CGImageSourceCreateWithURL((__bridge CFURLRef)[NSURL fileURLWithPath:url], NULL);
+        
         if (myImageSource == NULL) return;
 
         size_t count = CGImageSourceGetCount(myImageSource);
@@ -100,12 +107,16 @@
         else if(count > 1){//多张动图
             img = [self getCombineImages:myImageSource index:count];
         }
+        /**
+         *
+         */
         if (self.block) self.block(img);
         else if (self.delegate){
             if ([_delegate respondsToSelector:@selector(LLImageLoadBitDiddidReceiveGetImages:)]) {
                 [_delegate LLImageLoadBitDiddidReceiveGetImages:img];
             }
         }
+        
         CFRelease(myImageSource);
     });
 }
@@ -146,13 +157,13 @@
     CGFloat indexDuration = 0.1f;
     CFDictionaryRef cfProperties =  CGImageSourceCopyPropertiesAtIndex(myImageSource, i, NULL);
     NSDictionary *timesDic = (__bridge NSDictionary *)cfProperties;
-    NSDictionary *gifProperties = timesDic[(NSString *)kCGImagePropertyGIFDictionary];//[@"{GIF}"];
-    NSNumber *UnclampedDelayTime = gifProperties[(NSString *)kCGImagePropertyGIFUnclampedDelayTime];//[@"UnclampedDelayTime"]
+    NSDictionary *gifProperties = timesDic[(NSString *)kCGImagePropertyGIFDictionary];
+    NSNumber *UnclampedDelayTime = gifProperties[(NSString *)kCGImagePropertyGIFUnclampedDelayTime];
     if (UnclampedDelayTime) {
         indexDuration = UnclampedDelayTime.floatValue;
     }
     else{
-        NSNumber *DelayTime = gifProperties[(NSString *)kCGImagePropertyGIFDelayTime];//[@"DelayTime"]
+        NSNumber *DelayTime = gifProperties[(NSString *)kCGImagePropertyGIFDelayTime];
         if (DelayTime) {
             indexDuration = DelayTime.floatValue;
         }
@@ -197,6 +208,7 @@
      * 40这个值的设置是根据每次didReceiveData的数据长度估算的一个值
      * 这里不能每次接收到数据就将其转换为图片，这样对cpu消耗太大，容易引起崩溃
      */
+    
     if (self.TempImgData.length > self.expectedLeght/40 || self.expectedLeght == self.imgData.length) {
         self.TempImgData = nil;
         UIImage *img = [self creatImageWithData];
@@ -232,6 +244,9 @@
     
 }
 
+/**
+ * 代理模式方法
+ */
 #pragma mark - LLImageLoadBitDelegate
 -(void)initWithUrl:(NSString *)imageUrl withDelegate:(id<LLImageLoadBitDelegate>)delegate withType:(ImageTypeOptions)option{
         self.delegate = delegate;

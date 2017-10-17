@@ -21,19 +21,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    /**
-     * 使用webview加载gif动态图
-     */
-    NSData *data = [NSData dataWithContentsOfFile:imgURL];
-    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(100, 100, 200, 200)];
-    webView.userInteractionEnabled = NO;
-    [webView loadData:data MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
-    [self.view addSubview:webView];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(100, 300, 100, 50);
+    btn.backgroundColor = [UIColor orangeColor];
+    [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
     
 }
 
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+-(void)btnClick:(UIButton *)btn{
     PicShowGraduallyViewController *ctl = [[PicShowGraduallyViewController alloc]init];
     [self.navigationController pushViewController:ctl animated:YES];
 }

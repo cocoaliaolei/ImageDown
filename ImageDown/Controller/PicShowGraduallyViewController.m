@@ -52,7 +52,8 @@
     
     [self.view addSubview:self.imgView];
     
-    /**
+    
+    /** 一、
      * block模式
      */
     [[LLImageLoadBit alloc]initWithUrl:imgURL withType:gifImages  withBlock:^(UIImage *image) {
@@ -61,7 +62,7 @@
         });
     }];
     
-    /**
+    /** 二、
      * 代理模式
      */
     
@@ -72,8 +73,8 @@
 -(void)LLImageLoadBitDiddidReceiveGetImages:(UIImage *)image{
     
     dispatch_async(dispatch_get_main_queue(), ^{
-                    self.imgView.image = image;
-                });
+        self.imgView.image = image;
+    });
 }
 
 -(UIImageView *)imgView{
