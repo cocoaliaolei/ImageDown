@@ -18,6 +18,7 @@
 		B7062D251F95D74C004994F2 /* 54D2FBAC25E9A188F0BAD11F1401BCA4.gif in Resources */ = {isa = PBXBuildFile; fileRef = B7062D201F95D74C004994F2 /* 54D2FBAC25E9A188F0BAD11F1401BCA4.gif */; };
 		B7062D261F95D74C004994F2 /* LLImageLoadBit.m in Sources */ = {isa = PBXBuildFile; fileRef = B7062D221F95D74C004994F2 /* LLImageLoadBit.m */; };
 		B7062D271F95D74C004994F2 /* PicShowGraduallyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7062D241F95D74C004994F2 /* PicShowGraduallyViewController.m */; };
+		B7062D2B1F998519004994F2 /* LLimageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B7062D2A1F998518004994F2 /* LLimageCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		B7062D221F95D74C004994F2 /* LLImageLoadBit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLImageLoadBit.m; sourceTree = "<group>"; };
 		B7062D231F95D74C004994F2 /* PicShowGraduallyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicShowGraduallyViewController.h; sourceTree = "<group>"; };
 		B7062D241F95D74C004994F2 /* PicShowGraduallyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicShowGraduallyViewController.m; sourceTree = "<group>"; };
+		B7062D291F998518004994F2 /* LLimageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLimageCache.h; sourceTree = "<group>"; };
+		B7062D2A1F998518004994F2 /* LLimageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLimageCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +150,8 @@
 				B7062D201F95D74C004994F2 /* 54D2FBAC25E9A188F0BAD11F1401BCA4.gif */,
 				B7062D211F95D74C004994F2 /* LLImageLoadBit.h */,
 				B7062D221F95D74C004994F2 /* LLImageLoadBit.m */,
+				B7062D291F998518004994F2 /* LLimageCache.h */,
+				B7062D2A1F998518004994F2 /* LLimageCache.m */,
 				B7062D231F95D74C004994F2 /* PicShowGraduallyViewController.h */,
 				B7062D241F95D74C004994F2 /* PicShowGraduallyViewController.m */,
 			);
@@ -291,6 +296,7 @@
 				B7062D261F95D74C004994F2 /* LLImageLoadBit.m in Sources */,
 				B7062CF71F95D5FD004994F2 /* main.m in Sources */,
 				B7062CE91F95D5FD004994F2 /* AppDelegate.m in Sources */,
+				B7062D2B1F998519004994F2 /* LLimageCache.m in Sources */,
 				B7062D271F95D74C004994F2 /* PicShowGraduallyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

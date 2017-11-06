@@ -12,12 +12,12 @@
 /**
  *网络静态图url
  */
-#define imgURL @"http://b.zol-img.com.cn/desk/bizhi/image/1/1920x1200/1348810232493.jpg"
+//#define imgURL @"http://b.zol-img.com.cn/desk/bizhi/image/1/1920x1200/1348810232493.jpg"
 
 /**
- * 网络gif图片URL
+ * 网络动态gif图片URL
  */
-//#define imgURL @"http://c.hiphotos.baidu.com/image/pic/item/d62a6059252dd42a6a943c180b3b5bb5c8eab8e7.jpg"
+#define imgURL @"http://c.hiphotos.baidu.com/image/pic/item/d62a6059252dd42a6a943c180b3b5bb5c8eab8e7.jpg"
 
 
 /**
@@ -50,17 +50,20 @@
 
 -(void)initView{
     
-    [self.view addSubview:self.imgView];
+    self.edgesForExtendedLayout = UIRectEdgeBottom;
     
+    [self.view addSubview:self.imgView];
     
     /** 一、
      * block模式
      */
-    [[LLImageLoadBit alloc]initWithUrl:imgURL withType:signalImage  withBlock:^(UIImage *image) {
+    [[LLImageLoadBit alloc]initWithUrl:imgURL withType:gifImages  withBlock:^(UIImage *image) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.imgView.image = image;
         });
-    }];
+    }withCatheOptions:CacheOneDay];
+    
+    
     
     /** 二、
      * 代理模式
